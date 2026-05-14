@@ -15,6 +15,7 @@ namespace Game_app
     public partial class Level1 : Form
     {
         PictureBox pbPlayer;
+        PictureBox Gate;
         int groundLevel = 380;
         List<PictureBox> Platforms = new List<PictureBox>();
         bool isjumping = false;
@@ -25,21 +26,30 @@ namespace Game_app
         {
             InitializeComponent();
             createplayer();
-            createPlatforms();
+            CreatePlatforms();
+            CreateGate();
             gameLoop.Start();
         }
 
         private void gameLoop_Tick(object sender, EventArgs e)
         {
-            this.Validate();
+            
             if (pbPlayer == null) return;
 
 
             if (Keyboard.IsKeyPressed(Key.LeftArrow))
-                pbPlayer.Left -= 10;
+            {
+                if (pbPlayer.Left > 0)
+                {
+                    pbPlayer.Left -= 10;
+                }
+            }
 
             if (Keyboard.IsKeyPressed(Key.RightArrow))
-                pbPlayer.Left += 10;
+            {
+                if (pbPlayer.Left + pbPlayer.Width < this.ClientSize.Width)
+                    pbPlayer.Left += 10;
+            }
 
             if (Keyboard.IsKeyPressed(Key.UpArrow) && !isjumping)
             {
@@ -50,11 +60,13 @@ namespace Game_app
             pbPlayer.Top += JumpSpeed;
             JumpSpeed += gravity;
 
-            if (isLanding())
-            {
-                isjumping = false;
-                JumpSpeed = 0;
-            }
+            
+                if (isLanding())
+                {
+                    isjumping = false;
+                    JumpSpeed = 0;
+                }
+            
 
             if (pbPlayer.Top >= groundLevel)
             {
@@ -62,6 +74,14 @@ namespace Game_app
                 isjumping = false;
                 JumpSpeed = 0;
             }
+
+            if(pbPlayer.Bounds.IntersectsWith(Gate.Bounds))
+            {
+                gameLoop.Stop();
+                MessageBox.Show("Congratulations! You've reached the gate!");
+            }
+            
+ 
         }
 
         public bool isLanding()
@@ -70,12 +90,15 @@ namespace Game_app
             {
                 int playerFeet = pbPlayer.Top + pbPlayer.Height;
                 int platformTop = platform.Top + 12;
-                bool feetOnPlatform = (playerFeet >= platformTop) && (playerFeet <= platformTop + 15);
+
+                bool verticalCross = (playerFeet >= platformTop) && (playerFeet <= platformTop + JumpSpeed + gravity + 5);
+
+                bool comingFromAbove = pbPlayer.Top < platform.Top;
 
                 int margin = 45;
                 bool horizontalOverlap = (pbPlayer.Right - margin > platform.Left) && (pbPlayer.Left + margin < platform.Right);
 
-                if (horizontalOverlap && feetOnPlatform && JumpSpeed > 0)
+                if (horizontalOverlap && verticalCross && comingFromAbove && JumpSpeed > 0)
                 {
                     pbPlayer.Top = platformTop - pbPlayer.Height;
                     return true;
@@ -95,10 +118,11 @@ namespace Game_app
             pbPlayer.Left = 380;
             pbPlayer.Top = 380;
             this.Controls.Add(pbPlayer);
+            
             pbPlayer.BringToFront();
         }
 
-        private void createPlatforms()
+        private void CreatePlatforms()
         {
             AddPlatform(0, 420, 100, 20);
             AddPlatform(200, 350, 100, 20);
@@ -122,7 +146,42 @@ namespace Game_app
             platform.BringToFront();
             
         }
+        private void CreateGate()
+        { 
+            Gate = new PictureBox();
+            Image img = Game_app.Properties.Resources.Gate;
+            Gate.Image = img;
+            Gate.BackColor = Color.Transparent;
+            Gate.SizeMode = PictureBoxSizeMode.StretchImage;
+            Gate.Width = 110;
+            Gate.Height = 100;
+            Gate.Left = 830;
+            Gate.Top = 40;
+            this.Controls.Add(Gate);
+            Gate.BringToFront();
+        }
+
     }
 }
+
+/*public bool isLanding()
+{
+    foreach (PictureBox platform in Platforms)
+    {
+        int playerFeet = pbPlayer.Top + pbPlayer.Height;
+        int platformTop = platform.Top + 12;
+        bool feetOnPlatform = (playerFeet >= platformTop) && (playerFeet <= platformTop + 15);
+
+        int margin = 45;
+        bool horizontalOverlap = (pbPlayer.Right - margin > platform.Left) && (pbPlayer.Left + margin < platform.Right);
+
+        if (horizontalOverlap && feetOnPlatform && JumpSpeed > 0)
+        {
+            pbPlayer.Top = platformTop - pbPlayer.Height;
+            return true;
+        }
+    }
+    return false;
+}*/
 
 

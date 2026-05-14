@@ -73,6 +73,16 @@ namespace Game_app.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Gate {
+            get {
+                object obj = ResourceManager.GetObject("Gate", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Level_1_background_image_ {
             get {
                 object obj = ResourceManager.GetObject("Level 1 background image ", resourceCulture);
