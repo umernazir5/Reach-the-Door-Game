@@ -21,13 +21,23 @@ namespace Game_app
         List<PictureBox> Platforms = new List<PictureBox>();
         List<PictureBox> EnemyFire = new List<PictureBox>();
 
+
+        Image playerImage;
+        Image enemyImage;
+        Image fireImage;
+        Image platformImage;
+        Image gateImage;
+
         int groundLevel = 382;
+
 
         bool isjumping = false;
         int JumpSpeed = 0;
         int gravity = 3;
 
+
         bool facingRight = false;
+
 
         bool enemyMovingLeft = true;
 
@@ -39,8 +49,17 @@ namespace Game_app
         public Level1()
         {
             InitializeComponent();
-            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
-            this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+
+            playerImage = Game_app.Properties.Resources.Character;
+            enemyImage = Game_app.Properties.Resources.Enemy;
+            fireImage = Game_app.Properties.Resources.Fire;
+            platformImage = Game_app.Properties.Resources.Platform;
+            gateImage = Game_app.Properties.Resources.Gate;
+
+
+            this.SetStyle(ControlStyles.AllPaintingInWmPaint |ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer, true);
+            this.UpdateStyles();
+
             Createplayer();
             CreateGate();
             CreatePlatforms();
@@ -60,14 +79,11 @@ namespace Game_app
             EnemyMovement();
             CreateEnemyFire();
             EnemyfireMovement();
-
-
             if (CheckGateCollision())
             {
                 gameLoop.Stop();
                 MessageBox.Show("Congratulations! You've reached the gate!");
             }
-
 
         }
 
@@ -76,7 +92,7 @@ namespace Game_app
         private void Createplayer()
         {
             pbPlayer = new PictureBox();
-            pbPlayer.Image = Game_app.Properties.Resources.Character;
+            pbPlayer.Image = playerImage;
             pbPlayer.SizeMode = PictureBoxSizeMode.StretchImage;
             pbPlayer.BackColor = Color.Transparent;
             pbPlayer.Width = 120;
@@ -169,8 +185,7 @@ namespace Game_app
         private void CreateEnemy()
         {
             Enemy = new PictureBox();
-            Image img = Game_app.Properties.Resources.Enemy;
-            Enemy.Image = img;
+            Enemy.Image = enemyImage;
             Enemy.SizeMode = PictureBoxSizeMode.StretchImage;
             Enemy.BackColor = Color.Transparent;
             Enemy.Width = 120;
@@ -212,14 +227,14 @@ namespace Game_app
             fireTimer = 0;
 
             PictureBox enemyfire = new PictureBox();
-            Image img = Game_app.Properties.Resources.Fire;
-            enemyfire.Image = img;
+            
+            enemyfire.Image = fireImage;
             enemyfire.SizeMode = PictureBoxSizeMode.StretchImage;
             enemyfire.BackColor = Color.Transparent;
             enemyfire.Width = 70;
             enemyfire.Height = 50;
             enemyfire.Left = Enemy.Left + (Enemy.Width / 2) - (enemyfire.Width / 2);
-            enemyfire.Top = Enemy.Top + Enemy.Height;
+            enemyfire.Top = Enemy.Top + Enemy.Height - enemyfire.Height + 3;
             this.Controls.Add(enemyfire);
             enemyfire.BringToFront();
             EnemyFire.Add(enemyfire);
@@ -227,19 +242,23 @@ namespace Game_app
 
         public void EnemyfireMovement()
         {
-            foreach (PictureBox fire in EnemyFire)
+            for (int i = EnemyFire.Count - 1; i >= 0; i--)
             {
+                var fire = EnemyFire[i];
                 fire.Top += 7;
+
                 if (fire.Top > this.ClientSize.Height)
                 {
                     this.Controls.Remove(fire);
-                    EnemyFire.Remove(fire);
-                    break;
+                    EnemyFire.RemoveAt(i);
+                    fire.Dispose(); 
+                    continue;
                 }
+
                 if (CheckFireCollision(fire))
                 {
                     gameLoop.Stop();
-                    MessageBox.Show("Game Over! You were hit by the enemy's fire.");
+                    MessageBox.Show("Game Over!");
                     break;
                 }
             }
@@ -278,7 +297,7 @@ namespace Game_app
         private void AddPlatform(int left, int top, int width, int height)
         {
             PictureBox platform = new PictureBox();
-            platform.Image = Game_app.Properties.Resources.Platform;
+            platform.Image = platformImage;
             platform.SizeMode = PictureBoxSizeMode.StretchImage;
             platform.BackColor = Color.Transparent;
             platform.Left = left;
@@ -296,8 +315,7 @@ namespace Game_app
         private void CreateGate()
         {
             Gate = new PictureBox();
-            Image img = Game_app.Properties.Resources.Gate;
-            Gate.Image = img;
+            Gate.Image = gateImage;
             Gate.BackColor = Color.Transparent;
             Gate.SizeMode = PictureBoxSizeMode.StretchImage;
             Gate.Width = 110;
@@ -333,6 +351,14 @@ namespace Game_app
             musicPlayer.URL = Application.StartupPath + @"\Main_Theme.mp3";
             musicPlayer.settings.setMode("loop", true);
             musicPlayer.controls.play();
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+            e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighSpeed;
+            e.Graphics.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighSpeed;
+            base.OnPaint(e);
         }
 
     }
