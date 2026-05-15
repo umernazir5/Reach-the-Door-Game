@@ -73,6 +73,26 @@ namespace Game_app.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Enemy {
+            get {
+                object obj = ResourceManager.GetObject("Enemy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Fire {
+            get {
+                object obj = ResourceManager.GetObject("Fire", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Gate {
             get {
                 object obj = ResourceManager.GetObject("Gate", resourceCulture);
@@ -86,6 +106,16 @@ namespace Game_app.Properties {
         internal static System.Drawing.Bitmap Level_1_background_image_ {
             get {
                 object obj = ResourceManager.GetObject("Level 1 background image ", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap level1_blackbg {
+            get {
+                object obj = ResourceManager.GetObject("level1_blackbg", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
