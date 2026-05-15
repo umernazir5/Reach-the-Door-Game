@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using EZInput;
+using WMPLib;
 
 namespace Game_app
 {
@@ -21,7 +22,7 @@ namespace Game_app
         List<PictureBox> EnemyFire = new List<PictureBox>();
 
         int groundLevel = 382;
-        
+
         bool isjumping = false;
         int JumpSpeed = 0;
         int gravity = 3;
@@ -31,39 +32,43 @@ namespace Game_app
         bool enemyMovingLeft = true;
 
         int fireTimer = 0;
-        int fireInterval = 20; 
+        int fireInterval = 20;
+
+        WindowsMediaPlayer musicPlayer;
 
         public Level1()
         {
             InitializeComponent();
-            
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             Createplayer();
             CreateGate();
             CreatePlatforms();
             CreateEnemy();
-          
+            
+            PlayBackgroundMusic();
             gameLoop.Start();
-           
+
         }
 
         private void gameLoop_Tick(object sender, EventArgs e)
         {
-            
+
             if (pbPlayer == null) return;
 
             PlayerMovement();
             EnemyMovement();
             CreateEnemyFire();
             EnemyfireMovement();
-       
 
-            if(CheckGateCollision())
+
+            if (CheckGateCollision())
             {
                 gameLoop.Stop();
                 MessageBox.Show("Congratulations! You've reached the gate!");
             }
-            
- 
+
+
         }
 
 
@@ -79,7 +84,7 @@ namespace Game_app
             pbPlayer.Left = 380;
             pbPlayer.Top = 380;
             this.Controls.Add(pbPlayer);
-            
+
             pbPlayer.BringToFront();
         }
 
@@ -171,7 +176,7 @@ namespace Game_app
             Enemy.Width = 120;
             Enemy.Height = 100;
             Enemy.Left = 400;
-            Enemy.Top = 0 ;
+            Enemy.Top = 0;
             this.Controls.Add(Enemy);
             Enemy.BringToFront();
         }
@@ -203,7 +208,7 @@ namespace Game_app
         public void CreateEnemyFire()
         {
             fireTimer++;
-            if (fireTimer < fireInterval) return; 
+            if (fireTimer < fireInterval) return;
             fireTimer = 0;
 
             PictureBox enemyfire = new PictureBox();
@@ -248,7 +253,7 @@ namespace Game_app
                 fire.Height - 15
             );
 
-            
+
             Rectangle playerHitbox = new Rectangle(
                 pbPlayer.Left + 35,
                 pbPlayer.Top + 15,
@@ -283,13 +288,13 @@ namespace Game_app
             this.Controls.Add(platform);
             Platforms.Add(platform);
             platform.BringToFront();
-            
+
         }
 
         // Gate creation and collision detection
 
         private void CreateGate()
-        { 
+        {
             Gate = new PictureBox();
             Image img = Game_app.Properties.Resources.Gate;
             Gate.Image = img;
@@ -304,9 +309,9 @@ namespace Game_app
         }
         private bool CheckGateCollision()
         {
-           
-            int marginLeft = 70;  
-            int marginTop = 15;  
+
+            int marginLeft = 70;
+            int marginTop = 15;
             int marginRight = 10;
             int marginBottom = 10;
 
@@ -319,7 +324,16 @@ namespace Game_app
 
             return pbPlayer.Bounds.IntersectsWith(orbHitbox);
         }
-   
+
+        // Music control
+
+        private void PlayBackgroundMusic()
+        {
+            musicPlayer = new WindowsMediaPlayer();
+            musicPlayer.URL = Application.StartupPath + @"\Main_Theme.mp3";
+            musicPlayer.settings.setMode("loop", true);
+            musicPlayer.controls.play();
+        }
 
     }
 }
