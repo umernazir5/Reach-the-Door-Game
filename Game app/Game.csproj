@@ -120,6 +120,9 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Fahh.MP3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Main_Theme.mp3">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

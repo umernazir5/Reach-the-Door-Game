@@ -27,6 +27,7 @@ namespace Game_app
         Image fireImage;
         Image platformImage;
         Image gateImage;
+        Image gameoverImage;
 
         int groundLevel = 382;
 
@@ -55,6 +56,7 @@ namespace Game_app
             fireImage = Game_app.Properties.Resources.Fire;
             platformImage = Game_app.Properties.Resources.Platform;
             gateImage = Game_app.Properties.Resources.Gate;
+            gameoverImage = Game_app.Properties.Resources.gameover;
 
 
             this.SetStyle(ControlStyles.AllPaintingInWmPaint |ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer, true);
@@ -257,6 +259,9 @@ namespace Game_app
 
                 if (CheckFireCollision(fire))
                 {
+                    CreateGameoverAnimation();
+                    musicPlayer.controls.stop();
+                    FahMusic();
                     gameLoop.Stop();
                     MessageBox.Show("Game Over!");
                     break;
@@ -343,6 +348,22 @@ namespace Game_app
             return pbPlayer.Bounds.IntersectsWith(orbHitbox);
         }
 
+        // gameover animation
+
+        private void CreateGameoverAnimation()
+        {
+            PictureBox gameover = new PictureBox();
+            gameover.Image = gameoverImage;
+            gameover.SizeMode = PictureBoxSizeMode.StretchImage;
+            gameover.BackColor = Color.Transparent;
+            gameover.Width = pbPlayer.Width;
+            gameover.Height = pbPlayer.Height;
+            gameover.Left = pbPlayer.Left;
+            gameover.Top = pbPlayer.Top;
+            this.Controls.Add(gameover);
+            gameover.BringToFront();
+        }
+
         // Music control
 
         private void PlayBackgroundMusic()
@@ -353,6 +374,14 @@ namespace Game_app
             musicPlayer.controls.play();
         }
 
+        private void FahMusic()
+        {
+            musicPlayer = new WindowsMediaPlayer();
+            musicPlayer.URL = Application.StartupPath + @"\Fahh.mp3";
+            musicPlayer.controls.play();
+        }
+
+        // function or making playback better a bit
         protected override void OnPaint(PaintEventArgs e)
         {
             e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
