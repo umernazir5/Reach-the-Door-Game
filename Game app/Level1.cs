@@ -45,6 +45,12 @@ namespace Game_app
         int fireTimer = 0;
         int fireInterval = 20;
 
+
+        PictureBox pbHealthBar;
+        int playerHealth = 5;
+        bool isInvincible = false;
+        int invincibleTimer = 0;
+
         WindowsMediaPlayer musicPlayer;
 
         public Level1()
@@ -58,6 +64,8 @@ namespace Game_app
             gateImage = Game_app.Properties.Resources.Gate;
             gameoverImage = Game_app.Properties.Resources.gameover;
 
+           
+
 
             this.SetStyle(ControlStyles.AllPaintingInWmPaint |ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer, true);
             this.UpdateStyles();
@@ -67,6 +75,7 @@ namespace Game_app
             CreatePlatforms();
             CreateEnemy();
             
+            CreateHealthBar(); 
             PlayBackgroundMusic();
             gameLoop.Start();
 
@@ -81,6 +90,7 @@ namespace Game_app
             EnemyMovement();
             CreateEnemyFire();
             EnemyfireMovement();
+            HandleInvincibility();
             if (CheckGateCollision())
             {
                 gameLoop.Stop();
@@ -182,6 +192,62 @@ namespace Game_app
             return false;
         }
 
+        //player health system
+
+        private void CreateHealthBar()
+        {
+            pbHealthBar = new PictureBox();
+            pbHealthBar.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbHealthBar.BackColor = Color.Transparent;
+            pbHealthBar.Width = 220;
+            pbHealthBar.Height = 73;
+            pbHealthBar.Left = 16;
+            pbHealthBar.Top = this.ClientSize.Height - pbHealthBar.Height - 8;
+            pbHealthBar.Image = Game_app.Properties.Resources.Health5; 
+            this.Controls.Add(pbHealthBar);
+            pbHealthBar.BringToFront();
+        }
+
+        private void TakeDamage()
+        {
+            if (isInvincible) return;
+
+            playerHealth--;
+
+            if (playerHealth == 4) pbHealthBar.Image = Game_app.Properties.Resources.Health4;
+            if (playerHealth == 3) pbHealthBar.Image = Game_app.Properties.Resources.Health3;
+            if (playerHealth == 2) pbHealthBar.Image = Game_app.Properties.Resources.Health2;
+            if (playerHealth == 1) pbHealthBar.Image = Game_app.Properties.Resources.Health1;
+            if (playerHealth <= 0)
+            {
+                pbHealthBar.Image = Game_app.Properties.Resources.Health0;
+                CreateGameoverAnimation();
+                musicPlayer.controls.stop();
+                FahMusic();
+                gameLoop.Stop();
+                MessageBox.Show("Game Over!");
+                return;
+            }
+
+            isInvincible = true;
+            invincibleTimer = 40;
+        }
+
+        private void HandleInvincibility()
+        {
+            if (!isInvincible) 
+                return;
+
+            invincibleTimer--;
+            pbPlayer.Visible = (invincibleTimer % 8) < 4; 
+
+            if (invincibleTimer <= 0)
+            {
+                isInvincible = false;
+                pbPlayer.Visible = true;
+            }
+        }
+
         // Enemy creation and movement
 
         private void CreateEnemy()
@@ -259,11 +325,10 @@ namespace Game_app
 
                 if (CheckFireCollision(fire))
                 {
-                    CreateGameoverAnimation();
-                    musicPlayer.controls.stop();
-                    FahMusic();
-                    gameLoop.Stop();
-                    MessageBox.Show("Game Over!");
+                    this.Controls.Remove(fire);
+                    EnemyFire.RemoveAt(i);
+                    fire.Dispose();
+                    TakeDamage();
                     break;
                 }
             }
@@ -363,6 +428,8 @@ namespace Game_app
             this.Controls.Add(gameover);
             gameover.BringToFront();
         }
+
+
 
         // Music control
 

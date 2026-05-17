@@ -145,4 +145,22 @@
   <data name="gameover" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\gameover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Health0" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Health0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Health1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Health1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Health2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Health2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Health3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Health3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Health4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Health4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Health5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Health5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
