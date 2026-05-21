@@ -42,7 +42,13 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::Game_app.Properties.Resources.level1_blackbg;
             this.ClientSize = new System.Drawing.Size(1262, 673);
+            this.DoubleBuffered = true;
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(1280, 720);
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(1280, 720);
             this.Name = "Level2";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Level2";
             this.ResumeLayout(false);
 

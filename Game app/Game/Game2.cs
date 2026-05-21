@@ -83,11 +83,11 @@ namespace Game_app.Game
         }
         protected void CreateZombies()
         {
-            AddZombies(0, 420);
-            AddZombies(220, 330);
-            AddZombies(400, 270);
-            AddZombies(600, 190);
-            AddZombies(830, 140);
+            AddZombies(0, 300);
+            AddZombies(220, 270);
+            AddZombies(400, 190);
+            AddZombies(600, 95);
+            
         }
 
         protected void AddZombies(int x, int y)
@@ -293,13 +293,21 @@ namespace Game_app.Game
                 playerFire proj = playerFire[i];
                 if (!proj.IsAlive) continue;
 
-                foreach (Zombie zombie in zombies)
+                for (int j = zombies.Count - 1; j >= 0; j--)
                 {
+                    Zombie zombie = zombies[j];
                     if (collisionManager.CheckPlayerFireHitsEnemy(proj, zombie))
                     {
                         RemovePlayerFire(proj, i);
                         zombie.TakeHit();
 
+                        
+                        if (zombie.Health <= 0)
+                        {
+                            form.Controls.Remove(zombie.Sprite);
+                            zombie.Sprite.Dispose();
+                            zombies.RemoveAt(j);
+                        }
                         break;
                     }
                 }

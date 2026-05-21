@@ -14,10 +14,10 @@ namespace Game_app.GameObjects
             this.speed = speed;
             Sprite = new PictureBox();
             Sprite.Image = img;
-            Sprite.SizeMode = PictureBoxSizeMode.AutoSize;
+            Sprite.SizeMode = PictureBoxSizeMode.StretchImage;
             Sprite.BackColor = Color.Transparent;
-            Sprite.Width = img.Width;
-            Sprite.Height = img.Height;
+            Sprite.Width = 30;
+            Sprite.Height = 30;
             X = x;
             Y = y;
         }

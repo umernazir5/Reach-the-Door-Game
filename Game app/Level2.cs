@@ -19,6 +19,8 @@ namespace Game_app
             game.OnGameOver += HandleGameOver;
             game.OnGameWin += HandleGameWin;
             game.Start();
+            this.gameLoop.Tick += new System.EventHandler(this.gameLoop_Tick);
+            this.gameLoop.Enabled = true;
         }
 
         private void gameLoop_Tick(object sender, EventArgs e)
