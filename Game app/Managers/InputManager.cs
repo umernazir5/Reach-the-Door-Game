@@ -18,6 +18,10 @@ namespace Game_app.Managers
         {
             return Keyboard.IsKeyPressed(Key.UpArrow);
         }
+        public bool Fire()
+        {
+            return Keyboard.IsKeyPressed(Key.Space);
+        }
     }
 }
 

@@ -3,12 +3,13 @@ using System.Windows.Forms;
 
 namespace Game_app.GameObjects
 {
-    internal class enemyFire : GameObject
+    internal class playerFire : GameObject
     {
         private int speed;
         
+        bool playerMovingRight = true;
 
-        public enemyFire(Image img, int x, int y, int speed)
+        public playerFire(Image img, int x, int y, int speed)
         {
             this.speed = speed;
             Sprite = new PictureBox();
@@ -20,13 +21,20 @@ namespace Game_app.GameObjects
             X = x;
             Y = y;
         }
-
-        public void Move()
-        {
-            Y += speed;
-        }
     
+        public void Move(Player player)
+        {
+            if (player.facingRight)
+            { 
+              X += speed;
+            }
+            else 
+            {
+              X -= speed;
+            }
+        }
+
     }
 }
-    
+
 

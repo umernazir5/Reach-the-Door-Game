@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\Direction.cs" />
+    <Compile Include="GameObjects\playerFire.cs" />
     <Compile Include="GameObjects\Zombie.cs" />
     <Compile Include="Game\Game.cs" />
     <Compile Include="GameObjects\Enemy.cs" />
@@ -59,11 +60,18 @@
     <Compile Include="GameObjects\Platform.cs" />
     <Compile Include="GameObjects\Player.cs" />
     <Compile Include="GameObjects\enemyFire.cs" />
+    <Compile Include="Game\Game2.cs" />
     <Compile Include="Level1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Level1.Designer.cs">
       <DependentUpon>Level1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Level2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Level2.Designer.cs">
+      <DependentUpon>Level2.cs</DependentUpon>
     </Compile>
     <Compile Include="Managers\AudioManager.cs" />
     <Compile Include="Managers\CollisionManager.cs" />
@@ -72,6 +80,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Level1.resx">
       <DependentUpon>Level1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Level2.resx">
+      <DependentUpon>Level2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

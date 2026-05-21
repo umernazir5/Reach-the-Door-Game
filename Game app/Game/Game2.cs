@@ -10,15 +10,17 @@ using Game_app.Properties;
 
 namespace Game_app.Game
 {
-    internal class Game
+    internal class Game2
     {
         Player player;
         Enemy enemy;
         Gate gate;
         HealthBar healthBar;
-       
+
         List<Platform> platforms;
         List<enemyFire> enemyFire;
+        List<Zombie> zombies;
+        List<playerFire> playerFire;
 
         InputManager inputManager;
         CollisionManager collisionManager;
@@ -28,18 +30,24 @@ namespace Game_app.Game
 
         int fireTimer = 0;
         int fireInterval = 20;
+
+        int playerFireTimer = 0;
+        int playerFireInterval = 0;
+
         public int groundLevel = 382;
 
-   
+
         public event Action OnGameOver;
         public event Action OnGameWin;
 
-         
-        public Game(Form form)
+
+        public Game2(Form form)
         {
             this.form = form;
             platforms = new List<Platform>();
             enemyFire = new List<enemyFire>();
+            playerFire = new List<playerFire>();
+            zombies = new List<Zombie>();
             inputManager = new InputManager();
             collisionManager = new CollisionManager();
             audioManager = new AudioManager();
@@ -51,8 +59,13 @@ namespace Game_app.Game
             CreatePlayer();
             CreatePlatforms();
             CreateEnemy();
+            CreateZombies();
             CreateHealthBar();
             audioManager.PlayBackgroundMusic();
+            foreach (Platform platform in platforms)
+            {
+                platform.Sprite.BringToFront();
+            }
         }
 
         protected void CreatePlayer()
@@ -67,6 +80,22 @@ namespace Game_app.Game
             enemy = new Enemy(Game_app.Properties.Resources.Enemy, 400, 0);
             form.Controls.Add(enemy.Sprite);
             enemy.Sprite.BringToFront();
+        }
+        protected void CreateZombies()
+        {
+            AddZombies(0, 420);
+            AddZombies(220, 330);
+            AddZombies(400, 270);
+            AddZombies(600, 190);
+            AddZombies(830, 140);
+        }
+
+        protected void AddZombies(int x, int y)
+        {
+            Zombie zombie = new Zombie(Game_app.Properties.Resources.zombie, x, y);
+            form.Controls.Add(zombie.Sprite);
+            zombies.Add(zombie);
+            zombie.Sprite.BringToFront();
         }
 
         protected void CreateGate()
@@ -110,7 +139,10 @@ namespace Game_app.Game
             SpawnEnemyFire();
             UpdateEnemyFire();
             player.HandleInvincibility();
+            UpdatePlayerFire();
+            
             DetectCollisions();
+            detectPlayerFireCollisions();
         }
 
         protected void HandleInput()
@@ -123,6 +155,49 @@ namespace Game_app.Game
 
             if (inputManager.Jump())
                 player.Jump();
+            if (inputManager.Fire())
+                SpawnPlayerFire();
+        }
+        protected void SpawnPlayerFire()
+        {
+            playerFireTimer++;
+            if (playerFireTimer < playerFireInterval) return;
+            playerFireTimer = 0;
+            playerFire proj = player.Fire(Game_app.Properties.Resources.playerFire);
+            form.Controls.Add(proj.Sprite);
+            proj.Sprite.BringToFront();
+            playerFire.Add(proj);
+            foreach (Platform platform in platforms)
+            {
+                platform.Sprite.BringToFront();
+            }
+        }
+
+        protected void UpdatePlayerFire()
+        {
+            for (int i = playerFire.Count - 1; i >= 0; i--)
+            {
+                playerFire proj = playerFire[i];
+                if (!proj.IsAlive)
+                {
+                    RemovePlayerFire(proj, i);
+                    continue;
+                }
+
+                proj.Move(player);
+
+                if (proj.Y > form.ClientSize.Width)
+                {
+                    RemovePlayerFire(proj, i);
+                }
+            }
+        }
+
+        protected void RemovePlayerFire(playerFire proj, int index)
+        {
+            form.Controls.Remove(proj.Sprite);
+            proj.Sprite.Dispose();
+            playerFire.RemoveAt(index);
         }
 
         protected void UpdateEnemy()
@@ -177,7 +252,7 @@ namespace Game_app.Game
 
         protected void DetectCollisions()
         {
-           
+
             for (int i = enemyFire.Count - 1; i >= 0; i--)
             {
                 enemyFire proj = enemyFire[i];
@@ -205,10 +280,29 @@ namespace Game_app.Game
                 }
             }
 
-            
             if (collisionManager.CheckGateCollision(gate, player))
             {
                 OnGameWin?.Invoke();
+            }
+        }
+
+        public void detectPlayerFireCollisions()
+        {
+            for (int i = playerFire.Count - 1; i >= 0; i--)
+            {
+                playerFire proj = playerFire[i];
+                if (!proj.IsAlive) continue;
+
+                foreach (Zombie zombie in zombies)
+                {
+                    if (collisionManager.CheckPlayerFireHitsEnemy(proj, zombie))
+                    {
+                        RemovePlayerFire(proj, i);
+                        zombie.TakeHit();
+
+                        break;
+                    }
+                }
             }
         }
 

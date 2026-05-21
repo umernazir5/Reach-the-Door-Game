@@ -4,18 +4,18 @@ using System.Windows.Forms;
 
 namespace Game_app
 {
-    public partial class Level1 : Form
+    public partial class Level2 : Form
     {
-        Game.Game game;
+        Game.Game2 game;
 
-        public Level1()
+        public Level2()
         {
             InitializeComponent();
 
             this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer, true);
             this.UpdateStyles();
 
-            game = new Game.Game(this);
+            game = new Game.Game2(this);
             game.OnGameOver += HandleGameOver;
             game.OnGameWin += HandleGameWin;
             game.Start();
