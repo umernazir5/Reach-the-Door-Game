@@ -26,10 +26,10 @@ namespace Game_app.Managers
 
         public bool CheckGateCollision(Gate gate, Player player)
         {
-            int marginLeft = 40;
-            int marginTop = 10;
-            int marginRight = 5;
-            int marginBottom = 10;
+            int marginLeft = 60;
+            int marginTop = 15;
+            int marginRight = 10;
+            int marginBottom = 15;
 
             Rectangle gateHitbox = new Rectangle(
                 gate.X + marginLeft,
@@ -68,7 +68,7 @@ namespace Game_app.Managers
         }
         public bool CheckPlayerHitsZombie(Player player, Zombie zombie)
         {
-            // Use the same tight player hitbox you use for enemy fire
+           
             Rectangle playerHitbox = new Rectangle(
                 player.X + 30,
                 player.Y + 15,
@@ -76,7 +76,7 @@ namespace Game_app.Managers
                 player.Sprite.Height - 20
             );
 
-            // Create a tight hitbox for the zombie
+          
             Rectangle zombieHitbox = new Rectangle(
                 zombie.X + 30,
                 zombie.Y + 15,

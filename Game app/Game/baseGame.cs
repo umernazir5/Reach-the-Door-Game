@@ -154,8 +154,6 @@ namespace Game_app.Game
             playerFire proj = player.Fire(Game_app.Properties.Resources.playerFire);
             form.Controls.Add(proj.Sprite);
 
-            // Simplest fix: Just bring the player's fire to the very front. 
-            // It will fly right over the zombies and will NEVER get stuck behind the background!
             proj.Sprite.BringToFront();
 
             playerFire.Add(proj);
@@ -205,7 +203,6 @@ namespace Game_app.Game
             enemyFire proj = enemy.Fire(Game_app.Properties.Resources.enemyFire);
             form.Controls.Add(proj.Sprite);
 
-            // NEW: Instantly pushes the bullet behind all platforms, zombies, and the enemy!
             proj.Sprite.SendToBack();
             player.Sprite.SendToBack();
 
@@ -248,7 +245,7 @@ namespace Game_app.Game
             }
         }
 
-        // 1. The Master Caller: Only triggers the specific checks
+
         protected void DetectCollisions()
         {
             if (player == null || player.playerHealth <= 0) return;
@@ -259,7 +256,7 @@ namespace Game_app.Game
             CheckGateCollision();
         }
 
-        // 2. Responsibility: Check Enemy Fire vs Player
+ 
         protected void CheckEnemyFireCollisions()
         {
             for (int i = enemyFire.Count - 1; i >= 0; i--)
@@ -284,12 +281,12 @@ namespace Game_app.Game
                 if (collisionManager.CheckPlayerHitsZombie(player, zombie))
                 {
                     HandlePlayerDamage();
-                    // Optional: Add break if player should only take damage from one zombie at a time
+                    
                 }
             }
         }
 
-        // 4. Responsibility: Check Player Fire vs Zombies
+     
         protected void CheckPlayerFireCollisions()
         {
             for (int i = playerFire.Count - 1; i >= 0; i--)
