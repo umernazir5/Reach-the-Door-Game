@@ -36,8 +36,8 @@ namespace Game_app.GameObjects
             int left = X + (Sprite.Width / 2) - (fireWidth / 2);
             int top = Y + Sprite.Height - fireHeight + 3;
 
-            
-            return new playerFire(fireImg, left, top, 7, facingRight);
+            // CHANGED: Increased the speed from 7 to 25 to make it super fast!
+            return new playerFire(fireImg, left, top, 15, facingRight);
         }
 
         public void MoveLeft()

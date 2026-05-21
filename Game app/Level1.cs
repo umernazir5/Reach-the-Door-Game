@@ -6,7 +6,7 @@ namespace Game_app
 {
     public partial class Level1 : Form
     {
-        Game.Game game;
+        Game.Game1 game;
 
         public Level1()
         {
@@ -15,7 +15,7 @@ namespace Game_app
             this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer, true);
             this.UpdateStyles();
 
-            game = new Game.Game(this);
+            game = new Game.Game1(this);
             game.OnGameOver += HandleGameOver;
             game.OnGameWin += HandleGameWin;
             game.Start();

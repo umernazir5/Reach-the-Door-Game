@@ -52,7 +52,7 @@
     <Compile Include="Enums\Direction.cs" />
     <Compile Include="GameObjects\playerFire.cs" />
     <Compile Include="GameObjects\Zombie.cs" />
-    <Compile Include="Game\Game.cs" />
+    <Compile Include="Game\baseGame.cs" />
     <Compile Include="GameObjects\Enemy.cs" />
     <Compile Include="GameObjects\GameObject.cs" />
     <Compile Include="GameObjects\Gate.cs" />
@@ -60,6 +60,7 @@
     <Compile Include="GameObjects\Platform.cs" />
     <Compile Include="GameObjects\Player.cs" />
     <Compile Include="GameObjects\enemyFire.cs" />
+    <Compile Include="Game\Game1.cs" />
     <Compile Include="Game\Game2.cs" />
     <Compile Include="Level1.cs">
       <SubType>Form</SubType>
