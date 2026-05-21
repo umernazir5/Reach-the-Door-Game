@@ -83,9 +83,9 @@ namespace Game_app.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Fire {
+        internal static System.Drawing.Bitmap enemyFire {
             get {
-                object obj = ResourceManager.GetObject("Fire", resourceCulture);
+                object obj = ResourceManager.GetObject("enemyFire", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
