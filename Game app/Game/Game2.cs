@@ -28,11 +28,11 @@ namespace Game_app.Game
 
         public Form form;
 
-        int fireTimer = 0;
+        int fireTimer = 15;
         int fireInterval = 20;
 
         int playerFireTimer = 0;
-        int playerFireInterval = 0;
+        int playerFireInterval = 15;
 
         public int groundLevel = 382;
 
@@ -62,10 +62,33 @@ namespace Game_app.Game
             CreateZombies();
             CreateHealthBar();
             audioManager.PlayBackgroundMusic();
-            foreach (Platform platform in platforms)
-            {
-                platform.Sprite.BringToFront();
-            }
+
+            // Set exact Z-Order by stacking them from back to front
+            foreach (Platform platform in platforms) platform.Sprite.BringToFront();
+            foreach (Zombie zombie in zombies) zombie.Sprite.BringToFront();
+            player.Sprite.BringToFront();
+            enemy.Sprite.BringToFront(); // Enemy goes behind the gate
+            gate.Sprite.BringToFront();  // Gate goes completely in front
+            healthBar.Sprite.BringToFront();
+        }
+        public void Update()
+        {
+            if (player == null) return;
+
+
+            playerFireTimer++;
+
+            HandleInput();
+            player.UpdatePhysics(platforms);
+            UpdateEnemy();
+            SpawnEnemyFire();
+            UpdateEnemyFire();
+            player.HandleInvincibility();
+            UpdatePlayerFire();
+            UpdateZombies();
+
+            DetectCollisions();
+            detectPlayerFireCollisions();
         }
 
         protected void CreatePlayer()
@@ -83,35 +106,42 @@ namespace Game_app.Game
         }
         protected void CreateZombies()
         {
-            AddZombies(0, 300);
-            AddZombies(220, 270);
-            AddZombies(400, 190);
-            AddZombies(600, 95);
-            
+
+            AddZombies(150, 225, 150, 270);
+            AddZombies(320, 145, 320, 440);
+            AddZombies(550, 195, 550, 670);
         }
 
-        protected void AddZombies(int x, int y)
+        protected void AddZombies(int x, int y, int leftBound, int rightBound)
         {
-            Zombie zombie = new Zombie(Game_app.Properties.Resources.zombie, x, y);
+            // Update to use the new constructor format
+            Zombie zombie = new Zombie(Game_app.Properties.Resources.zombie, x, y, leftBound, rightBound);
             form.Controls.Add(zombie.Sprite);
             zombies.Add(zombie);
-            zombie.Sprite.BringToFront();
+        }
+        protected void UpdateZombies()
+        {
+            foreach (Zombie zombie in zombies)
+            {
+                zombie.Move();
+            }
         }
 
         protected void CreateGate()
         {
-            gate = new Gate(Game_app.Properties.Resources.Gate, 823, 55);
+            gate = new Gate(Game_app.Properties.Resources.Gate, 545, 30);
             form.Controls.Add(gate.Sprite);
             gate.Sprite.BringToFront();
         }
 
         protected void CreatePlatforms()
         {
-            AddPlatform(0, 420, 100, 20);
-            AddPlatform(200, 350, 100, 20);
-            AddPlatform(400, 270, 100, 20);
-            AddPlatform(600, 190, 100, 20);
-            AddPlatform(830, 140, 100, 20);
+            AddPlatform(250, 390, 120, 20);
+            AddPlatform(150, 310, 120, 20);
+            AddPlatform(320, 230, 120, 20);
+            AddPlatform(550, 280, 120, 20);
+            AddPlatform(720, 200, 120, 20);
+            AddPlatform(540, 125, 120, 20);
         }
 
         protected void AddPlatform(int x, int y, int width, int height)
@@ -129,21 +159,7 @@ namespace Game_app.Game
             healthBar.Sprite.BringToFront();
         }
 
-        public void Update()
-        {
-            if (player == null) return;
-
-            HandleInput();
-            player.UpdatePhysics(platforms);
-            UpdateEnemy();
-            SpawnEnemyFire();
-            UpdateEnemyFire();
-            player.HandleInvincibility();
-            UpdatePlayerFire();
-            
-            DetectCollisions();
-            detectPlayerFireCollisions();
-        }
+      
 
         protected void HandleInput()
         {
@@ -160,17 +176,16 @@ namespace Game_app.Game
         }
         protected void SpawnPlayerFire()
         {
-            playerFireTimer++;
+            // Check if the cooldown has finished
             if (playerFireTimer < playerFireInterval) return;
+
+            
             playerFireTimer = 0;
+
             playerFire proj = player.Fire(Game_app.Properties.Resources.playerFire);
             form.Controls.Add(proj.Sprite);
             proj.Sprite.BringToFront();
             playerFire.Add(proj);
-            foreach (Platform platform in platforms)
-            {
-                platform.Sprite.BringToFront();
-            }
         }
 
         protected void UpdatePlayerFire()
@@ -184,9 +199,9 @@ namespace Game_app.Game
                     continue;
                 }
 
-                proj.Move(player);
+                proj.Move();
 
-                if (proj.Y > form.ClientSize.Width)
+                if (proj.X > form.ClientSize.Width || proj.X < 0)
                 {
                     RemovePlayerFire(proj, i);
                 }

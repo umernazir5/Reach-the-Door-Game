@@ -35,7 +35,9 @@ namespace Game_app.GameObjects
             int fireHeight = 50;
             int left = X + (Sprite.Width / 2) - (fireWidth / 2);
             int top = Y + Sprite.Height - fireHeight + 3;
-            return new playerFire(fireImg, left, top, 7);
+
+            
+            return new playerFire(fireImg, left, top, 7, facingRight);
         }
 
         public void MoveLeft()

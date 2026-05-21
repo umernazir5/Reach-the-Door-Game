@@ -38,7 +38,13 @@ namespace Game_app
         {
             gameLoop.Stop();
             MessageBox.Show("Congratulations! You've reached the gate!");
+
             Level2 level2 = new Level2();
+
+            // NEW: This ensures that when you eventually close the new game window, 
+            // the hidden old game window properly closes itself and frees up memory!
+            level2.FormClosed += (s, args) => this.Close();
+
             level2.Show();
             this.Hide();
         }

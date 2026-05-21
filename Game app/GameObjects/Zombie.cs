@@ -9,7 +9,11 @@ namespace Game_app.GameObjects
         public int Health = 2;
         private Direction direction = Direction.Left;
 
-        public Zombie(Image img, int x, int y)
+        public int leftBoundary;
+        public int rightBoundary;
+
+        // NEW: Constructor now takes boundary limits
+        public Zombie(Image img, int x, int y, int leftBound, int rightBound)
         {
             Sprite = new PictureBox();
             Sprite.Image = img;
@@ -19,6 +23,8 @@ namespace Game_app.GameObjects
             Sprite.Height = 100;
             X = x;
             Y = y;
+            leftBoundary = leftBound;
+            rightBoundary = rightBound;
         }
 
         public void Move()
@@ -26,19 +32,24 @@ namespace Game_app.GameObjects
             if (direction == Direction.Left)
             {
                 X -= 4;
-                if (X <= 0) direction = Direction.Right;
             }
             else
             {
                 X += 4;
             }
+
+            // Check boundaries every time it moves
+            CheckBoundary(leftBoundary, rightBoundary);
         }
 
-        public void CheckBoundary(int left , int right)
+        public void CheckBoundary(int left, int right)
         {
-            if (X + Sprite.Width >= right) 
+            // NEW: Use the center of the zombie so it doesn't glitch on small platforms
+            int center = X + (Sprite.Width / 2);
+
+            if (center >= right)
                 direction = Direction.Left;
-            if (X <= left) 
+            if (center <= left)
                 direction = Direction.Right;
         }
 

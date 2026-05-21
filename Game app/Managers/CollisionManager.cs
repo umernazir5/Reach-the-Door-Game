@@ -38,7 +38,16 @@ namespace Game_app.Managers
                 gate.Sprite.Height - marginTop - marginBottom
             );
 
-            return player.Bounds.IntersectsWith(gateHitbox);
+            
+            Rectangle playerHitbox = new Rectangle(
+                player.X + 30,
+                player.Y + 15,
+                player.Sprite.Width - 50,
+                player.Sprite.Height - 20
+            );
+
+            
+            return playerHitbox.IntersectsWith(gateHitbox);
         }
 
         public bool CheckPlayerFireHitsEnemy(playerFire proj, Zombie zombie)

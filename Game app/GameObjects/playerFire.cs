@@ -6,14 +6,25 @@ namespace Game_app.GameObjects
     internal class playerFire : GameObject
     {
         private int speed;
-        
-        bool playerMovingRight = true;
 
-        public playerFire(Image img, int x, int y, int speed)
+        private bool isMovingRight;
+
+
+        public playerFire(Image img, int x, int y, int speed, bool movingRight)
         {
             this.speed = speed;
+            this.isMovingRight = movingRight; 
+
             Sprite = new PictureBox();
-            Sprite.Image = img;
+
+            
+            Sprite.Image = (Image)img.Clone();
+
+            if (movingRight)
+            {
+                Sprite.Image.RotateFlip(RotateFlipType.RotateNoneFlipX);
+            }
+
             Sprite.SizeMode = PictureBoxSizeMode.StretchImage;
             Sprite.BackColor = Color.Transparent;
             Sprite.Width = 30;
@@ -21,20 +32,23 @@ namespace Game_app.GameObjects
             X = x;
             Y = y;
         }
-    
-        public void Move(Player player)
+
+
+        public void Move()
         {
-            if (player.facingRight)
-            { 
-              X += speed;
-            }
-            else 
+            
+            if (isMovingRight)
             {
-              X -= speed;
+                X += speed;
+            }
+            else
+            {
+                X -= speed;
             }
         }
-
     }
 }
+
+    
 
 
