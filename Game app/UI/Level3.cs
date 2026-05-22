@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Game_app.UI;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -44,9 +45,11 @@ namespace Game_app
         {
             gameLoop.Stop();
 
-            MessageBox.Show("Congratulations! You've survived the zombie fire and beaten the game!");
-
-            Application.Exit();
+            BossVideo bossvideo = new BossVideo();
+            NextLevel transition = new NextLevel(bossvideo);
+            transition.FormClosed += (s, args) => Application.Exit();
+            transition.Show();
+            this.Hide();
         }
 
         protected override void OnPaint(PaintEventArgs e)

@@ -19,7 +19,7 @@ namespace Game_app
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FinalBoss());
+            Application.Run(new MainMenu());
         }
     }
 }

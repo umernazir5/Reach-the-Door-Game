@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Game_app.GameObjects;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,7 +21,7 @@ namespace Game_app.UI
             axWindowsMediaPlayer1.uiMode = "none";
 
             // 2. Play the video!
-            axWindowsMediaPlayer1.URL = Application.StartupPath + @"\BossVideo.mp4";
+            axWindowsMediaPlayer1.URL = Application.StartupPath + @"\Video.mp4";
             axWindowsMediaPlayer1.Ctlcontrols.play();
 
             // 3. Listen for when the video changes state (like when it finishes)
@@ -32,13 +33,11 @@ namespace Game_app.UI
             // State 8 means the video finished playing
             if (e.newState == 8)
             {
-                // Show a placeholder message since the Boss Level isn't ready
-                MessageBox.Show("Cinematic finished! Boss Level coming soon...");
-
+                
                 // Send the player back to the Main Menu for now
-                MainMenu menu = new MainMenu();
-                menu.FormClosed += (s, args) => Application.Exit();
-                menu.Show();
+                FinalBoss boss = new FinalBoss();
+                boss.FormClosed += (s, args) => Application.Exit();
+                boss.Show();
 
                 this.Hide();
             }

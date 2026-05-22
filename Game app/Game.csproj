@@ -219,9 +219,6 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="BossVideo.mp4">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Damage.MP3">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -229,6 +226,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Main_Theme.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Video.mp4">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

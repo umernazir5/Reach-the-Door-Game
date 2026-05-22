@@ -46,7 +46,10 @@ namespace Game_app
 
             MessageBox.Show("Congratulations! You've survived the zombie fire and beaten the game!");
 
-            Application.Exit();
+            MainMenu mainmenu = new MainMenu();
+            mainmenu.FormClosed += (s, args) => Application.Exit();
+            mainmenu.Show();
+            this.Hide();
         }
 
         protected override void OnPaint(PaintEventArgs e)

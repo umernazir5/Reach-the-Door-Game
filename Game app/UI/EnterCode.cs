@@ -26,6 +26,7 @@ namespace Game_app
             if (secretCode == "level1") nextLevel = new Level1();
             else if (secretCode == "level2") nextLevel = new Level2();
             else if (secretCode == "level3") nextLevel = new Level3();
+            else if (secretCode == "finalboss") nextLevel = new FinalBoss();
             else
             {
                 MessageBox.Show("Invalid Code! Please try again.");

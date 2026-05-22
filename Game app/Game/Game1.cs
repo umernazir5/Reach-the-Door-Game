@@ -32,6 +32,8 @@ namespace Game_app.Game
         protected int playerFireInterval = 15;
         public int groundLevel = 382;
 
+        private bool isGameOver = false;
+
         public event Action OnGameOver;
         public event Action OnGameWin;
 
@@ -254,6 +256,9 @@ namespace Game_app.Game
 
         protected void TriggerGameOver()
         {
+            if (isGameOver) return; 
+            isGameOver = true;
+
             CreateGameOverAnimation();
             audioManager.Stop();
             audioManager.PlayGameOverMusic();
