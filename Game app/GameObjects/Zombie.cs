@@ -12,7 +12,7 @@ namespace Game_app.GameObjects
         public int leftBoundary;
         public int rightBoundary;
 
-        // NEW: Constructor now takes boundary limits
+       
         public Zombie(Image img, int x, int y, int leftBound, int rightBound)
         {
             Sprite = new PictureBox();
@@ -37,14 +37,11 @@ namespace Game_app.GameObjects
             {
                 X += 4;
             }
-
-            // Check boundaries every time it moves
             CheckBoundary(leftBoundary, rightBoundary);
         }
 
         public void CheckBoundary(int left, int right)
         {
-            // NEW: Use the center of the zombie so it doesn't glitch on small platforms
             int center = X + (Sprite.Width / 2);
 
             if (center >= right)

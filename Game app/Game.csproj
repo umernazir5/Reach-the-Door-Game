@@ -52,7 +52,6 @@
     <Compile Include="Enums\Direction.cs" />
     <Compile Include="GameObjects\playerFire.cs" />
     <Compile Include="GameObjects\Zombie.cs" />
-    <Compile Include="Game\baseGame.cs" />
     <Compile Include="GameObjects\Enemy.cs" />
     <Compile Include="GameObjects\GameObject.cs" />
     <Compile Include="GameObjects\Gate.cs" />
