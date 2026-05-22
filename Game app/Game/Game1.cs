@@ -9,7 +9,7 @@ namespace Game_app.Game
 {
     internal class Game1
     {
-        // Protected means Game2 and Game3 can use these variables
+       
         protected Player player;
         protected Enemy enemy;
         protected Gate gate;
@@ -94,7 +94,7 @@ namespace Game_app.Game
             AddPlatform(830, 140, 100, 20);
         }
 
-        // --- STANDARD LEVEL 1 LOGIC ---
+        
         protected virtual void CreatePlayer()
         {
             player = new Player(Game_app.Properties.Resources.Character, 380, 380, groundLevel);
@@ -229,7 +229,6 @@ namespace Game_app.Game
 
         protected virtual void CheckGateCollision()
         {
-            // Level 1 Gate is always open and visible
             if (gate != null && gate.Sprite.Visible && collisionManager.CheckGateCollision(gate, player))
             {
                 TriggerGameWin();
