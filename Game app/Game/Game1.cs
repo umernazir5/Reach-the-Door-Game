@@ -169,7 +169,7 @@ namespace Game_app.Game
             enemy.CheckBoundary(form.ClientSize.Width);
         }
 
-        protected void SpawnEnemyFire()
+        protected virtual void SpawnEnemyFire()
         {
             if (enemy == null) return;
             fireTimer++;
@@ -182,7 +182,7 @@ namespace Game_app.Game
             enemyFire.Add(proj);
         }
 
-        protected void UpdateEnemyFire()
+        protected virtual void UpdateEnemyFire()
         {
             for (int i = enemyFire.Count - 1; i >= 0; i--)
             {

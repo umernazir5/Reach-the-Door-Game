@@ -1,4 +1,4 @@
-﻿namespace Game_app.UI
+﻿namespace Game_app
 {
     partial class FinalBoss
     {
@@ -28,9 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            this.gameLoop = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
-            // FinalBoss
+            // gameLoop
+            // 
+            this.gameLoop.Interval = 30;
+            // 
+            // Level3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -42,7 +48,7 @@
             this.MaximumSize = new System.Drawing.Size(1280, 720);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(1280, 720);
-            this.Name = "FinalBoss";
+            this.Name = "Level3";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FinalBoss";
             this.ResumeLayout(false);
@@ -50,5 +56,7 @@
         }
 
         #endregion
+
+        private System.Windows.Forms.Timer gameLoop;
     }
 }

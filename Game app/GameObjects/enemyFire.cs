@@ -6,7 +6,8 @@ namespace Game_app.GameObjects
     internal class enemyFire : GameObject
     {
         private int speed;
-        
+        public int VelocityX { get; set; } = 0;
+        public int VelocityY { get; set; } = 0;
 
         public enemyFire(Image img, int x, int y, int speed)
         {
@@ -25,9 +26,11 @@ namespace Game_app.GameObjects
         {
             Y += speed;
         }
-    
 
+        public void DirectionalMove()
+        {
+            X += VelocityX;
+            Y += VelocityY;
+        }
     }
 }
-    
-

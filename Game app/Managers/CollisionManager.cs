@@ -104,5 +104,41 @@ namespace Game_app.Managers
 
             return playerHitbox.IntersectsWith(fireHitbox);
         }
+        public bool CheckPlayerFireHitsEnemy(playerFire proj, Boss boss)
+        {
+            Rectangle fireHitbox = new Rectangle(
+                proj.X + 20,
+                proj.Y + 20,
+                proj.Sprite.Width - 50,
+                proj.Sprite.Height - 15
+            );
+
+            Rectangle bossHitbox = new Rectangle(
+                boss.X + 10,
+                boss.Y + 10,
+                boss.Sprite.Width - 20,
+                boss.Sprite.Height - 20
+            );
+
+            return bossHitbox.IntersectsWith(fireHitbox);
+        }
+        public bool CheckPlayerHitsBoss(Player player, Boss boss)
+        {
+            Rectangle playerHitbox = new Rectangle(
+                player.X + 30,
+                player.Y + 15,
+                player.Sprite.Width - 50,
+                player.Sprite.Height - 20
+            );
+
+            Rectangle bossHitbox = new Rectangle(
+                boss.X + 10,
+                boss.Y + 10,
+                boss.Sprite.Width - 20,
+                boss.Sprite.Height - 20
+            );
+
+            return playerHitbox.IntersectsWith(bossHitbox);
+        }
     }
 }

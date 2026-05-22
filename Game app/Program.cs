@@ -1,4 +1,5 @@
-﻿using Game_app.UI;
+﻿using Game_app.Game;
+using Game_app.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace Game_app
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainMenu());
+            Application.Run(new FinalBoss());
         }
     }
 }
