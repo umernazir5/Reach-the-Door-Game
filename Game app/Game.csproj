@@ -96,6 +96,12 @@
     <Compile Include="Managers\AudioManager.cs" />
     <Compile Include="Managers\CollisionManager.cs" />
     <Compile Include="Managers\InputManager.cs" />
+    <Compile Include="NextLevel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NextLevel.Designer.cs">
+      <DependentUpon>NextLevel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="EnterCode.resx">
@@ -112,6 +118,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainMenu.resx">
       <DependentUpon>MainMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NextLevel.resx">
+      <DependentUpon>NextLevel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

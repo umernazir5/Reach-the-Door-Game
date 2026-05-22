@@ -5,19 +5,27 @@ namespace Game_app.Managers
 {
     internal class AudioManager
     {
-        private WindowsMediaPlayer musicPlayer;
-        private WindowsMediaPlayer sfxPlayer; // <-- ADD THIS for sound effects!
+       
+        private static WindowsMediaPlayer musicPlayer;
+        private static WindowsMediaPlayer sfxPlayer;
 
         public void PlayBackgroundMusic()
         {
-            musicPlayer = new WindowsMediaPlayer();
-            musicPlayer.URL = Application.StartupPath + @"\Main_Theme.mp3";
-            musicPlayer.settings.setMode("loop", true);
-            musicPlayer.controls.play();
+           
+            if (musicPlayer == null)
+            {
+                musicPlayer = new WindowsMediaPlayer();
+                musicPlayer.URL = Application.StartupPath + @"\Main_Theme.mp3";
+                musicPlayer.settings.setMode("loop", true);
+                musicPlayer.controls.play();
+            }
         }
 
         public void PlayGameOverMusic()
         {
+     
+            if (musicPlayer != null) musicPlayer.controls.stop();
+
             musicPlayer = new WindowsMediaPlayer();
             musicPlayer.URL = Application.StartupPath + @"\Fahh.mp3";
             musicPlayer.controls.play();
@@ -25,7 +33,6 @@ namespace Game_app.Managers
 
         public void PlayDamageMusic()
         {
-            // Use sfxPlayer here instead of musicPlayer!
             sfxPlayer = new WindowsMediaPlayer();
             sfxPlayer.URL = Application.StartupPath + @"\Damage.mp3";
             sfxPlayer.controls.play();
@@ -36,7 +43,6 @@ namespace Game_app.Managers
             if (musicPlayer != null)
                 musicPlayer.controls.stop();
 
-            // Optional: Stop the sound effect too if the game is over
             if (sfxPlayer != null)
                 sfxPlayer.controls.stop();
         }

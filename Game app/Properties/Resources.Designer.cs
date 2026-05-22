@@ -223,6 +223,26 @@ namespace Game_app.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap NextLevel {
+            get {
+                object obj = ResourceManager.GetObject("NextLevel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap NextlevelButton {
+            get {
+                object obj = ResourceManager.GetObject("NextlevelButton", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Platform {
             get {
                 object obj = ResourceManager.GetObject("Platform", resourceCulture);
@@ -256,6 +276,16 @@ namespace Game_app.Properties {
         internal static System.Drawing.Bitmap playerFire {
             get {
                 object obj = ResourceManager.GetObject("playerFire", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SubmitCode {
+            get {
+                object obj = ResourceManager.GetObject("SubmitCode", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

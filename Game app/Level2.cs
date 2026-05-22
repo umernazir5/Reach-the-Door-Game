@@ -37,13 +37,11 @@ namespace Game_app
         private void HandleGameWin()
         {
             gameLoop.Stop();
-            MessageBox.Show("Congratulations! You've reached the gate!");
 
-            Level2 level2 = new Level2();
-
-            level2.FormClosed += (s, args) => this.Close();
-
-            level2.Show();
+            Level3 level3 = new Level3();
+            NextLevel transition = new NextLevel(level3);
+            transition.FormClosed += (s, args) => Application.Exit();
+            transition.Show();
             this.Hide();
         }
 

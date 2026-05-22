@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.txtEnterCode = new System.Windows.Forms.TextBox();
+            this.SubmitCodeButton = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.SubmitCodeButton)).BeginInit();
             this.SuspendLayout();
             // 
             // txtEnterCode
@@ -43,6 +45,18 @@
             this.txtEnterCode.TabIndex = 1;
             this.txtEnterCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // SubmitCodeButton
+            // 
+            this.SubmitCodeButton.BackColor = System.Drawing.Color.Transparent;
+            this.SubmitCodeButton.Image = global::Game_app.Properties.Resources.SubmitCode;
+            this.SubmitCodeButton.Location = new System.Drawing.Point(470, 529);
+            this.SubmitCodeButton.Name = "SubmitCodeButton";
+            this.SubmitCodeButton.Size = new System.Drawing.Size(322, 99);
+            this.SubmitCodeButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.SubmitCodeButton.TabIndex = 2;
+            this.SubmitCodeButton.TabStop = false;
+            this.SubmitCodeButton.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
             // EnterCode
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -50,6 +64,7 @@
             this.BackgroundImage = global::Game_app.Properties.Resources.enterCodeForm;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1262, 673);
+            this.Controls.Add(this.SubmitCodeButton);
             this.Controls.Add(this.txtEnterCode);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.MaximizeBox = false;
@@ -59,6 +74,7 @@
             this.Name = "EnterCode";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "EnterCode";
+            ((System.ComponentModel.ISupportInitialize)(this.SubmitCodeButton)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -67,5 +83,6 @@
         #endregion
 
         private System.Windows.Forms.TextBox txtEnterCode;
+        private System.Windows.Forms.PictureBox SubmitCodeButton;
     }
 }

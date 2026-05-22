@@ -35,9 +35,10 @@ namespace Game_app
         private void HandleGameWin()
         {
             gameLoop.Stop();
-            MessageBox.Show("Congratulations! You've reached the gate!");
             Level2 level2 = new Level2();
-            level2.Show();
+            NextLevel transition = new NextLevel(level2);
+            transition.FormClosed += (s, args) => Application.Exit();
+            transition.Show();
             this.Hide();
         }
 

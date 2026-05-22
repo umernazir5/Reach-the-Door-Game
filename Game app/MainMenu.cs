@@ -19,7 +19,21 @@ namespace Game_app
 
         private void playbutton_Click(object sender, EventArgs e)
         {
+            Level1 level1 = new Level1();
 
+            // Ensure the whole app closes when the player eventually closes the game window
+            level1.FormClosed += (s, args) => Application.Exit();
+
+            level1.Show();
+            this.Hide(); // Hides the Main Menu
+        }
+
+        private void EnterYourCode_Click(object sender, EventArgs e)
+        {
+            EnterCode codeForm = new EnterCode();
+
+            // ShowDialog opens the code form like a popup on top of the main menu
+            codeForm.ShowDialog();
         }
     }
 }

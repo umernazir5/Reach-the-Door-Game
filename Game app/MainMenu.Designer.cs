@@ -56,6 +56,7 @@
             this.EnterYourCode.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.EnterYourCode.TabIndex = 1;
             this.EnterYourCode.TabStop = false;
+            this.EnterYourCode.Click += new System.EventHandler(this.EnterYourCode_Click);
             // 
             // MainMenu
             // 
@@ -71,6 +72,7 @@
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(1280, 720);
             this.Name = "MainMenu";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MainMenu";
             ((System.ComponentModel.ISupportInitialize)(this.playbutton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.EnterYourCode)).EndInit();
