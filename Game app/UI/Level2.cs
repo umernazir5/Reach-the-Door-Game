@@ -4,21 +4,23 @@ using System.Windows.Forms;
 
 namespace Game_app
 {
-    public partial class Level1 : Form
+    public partial class Level2 : Form
     {
-        Game.Game1 game;
+        Game.Game2 game;
 
-        public Level1()
+        public Level2()
         {
             InitializeComponent();
 
             this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer, true);
             this.UpdateStyles();
 
-            game = new Game.Game1(this);
+            game = new Game.Game2(this);
             game.OnGameOver += HandleGameOver;
             game.OnGameWin += HandleGameWin;
             game.Start();
+            this.gameLoop.Tick += new System.EventHandler(this.gameLoop_Tick);
+            this.gameLoop.Enabled = true;
         }
 
         private void gameLoop_Tick(object sender, EventArgs e)
@@ -28,15 +30,18 @@ namespace Game_app
 
         private void HandleGameOver()
         {
-            gameLoop.Stop();
-            MessageBox.Show("Game Over!");
+            GameOver gameover = new GameOver();
+            gameover.FormClosed += (s, args) => Application.Exit();
+            gameover.Show();
+            this.Hide();
         }
 
         private void HandleGameWin()
         {
             gameLoop.Stop();
-            Level2 level2 = new Level2();
-            NextLevel transition = new NextLevel(level2);
+
+            Level3 level3 = new Level3();
+            NextLevel transition = new NextLevel(level3);
             transition.FormClosed += (s, args) => Application.Exit();
             transition.Show();
             this.Hide();

@@ -34,21 +34,18 @@ namespace Game_app
 
         private void HandleGameOver()
         {
-            gameLoop.Stop();
-            MessageBox.Show("Game Over!");
-
-            // Optional: You can choose to restart the level or close the app here
-            // Application.Exit(); 
+            GameOver gameover = new GameOver();
+            gameover.FormClosed += (s, args) => Application.Exit();
+            gameover.Show();
+            this.Hide();
         }
 
         private void HandleGameWin()
         {
             gameLoop.Stop();
 
-            // Since this is Level 3, we show a final victory message instead of loading Level 2!
             MessageBox.Show("Congratulations! You've survived the zombie fire and beaten the game!");
 
-            // Closes the entire game safely and frees up memory
             Application.Exit();
         }
 
