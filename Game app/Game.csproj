@@ -49,6 +49,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GameObjects\Boss.cs" />
+    <Compile Include="Game\BossLevel.cs" />
+    <Compile Include="UI\BossVideo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\BossVideo.Designer.cs">
+      <DependentUpon>BossVideo.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\EnterCode.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -66,6 +74,12 @@
     <Compile Include="GameObjects\Player.cs" />
     <Compile Include="GameObjects\enemyFire.cs" />
     <Compile Include="GameObjects\ZombieFire.cs" />
+    <Compile Include="UI\FinalBoss.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\FinalBoss.Designer.cs">
+      <DependentUpon>FinalBoss.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\GameOver.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -110,8 +124,14 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="UI\BossVideo.resx">
+      <DependentUpon>BossVideo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\EnterCode.resx">
       <DependentUpon>EnterCode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\FinalBoss.resx">
+      <DependentUpon>FinalBoss.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\GameOver.resx">
       <DependentUpon>GameOver.cs</DependentUpon>
@@ -162,6 +182,14 @@
     <None Include="Resources\Character.png" />
   </ItemGroup>
   <ItemGroup>
+    <COMReference Include="AxWMPLib">
+      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
     <COMReference Include="MediaPlayer">
       <Guid>{22D6F304-B0F6-11D0-94AB-0080C74C7E95}</Guid>
       <VersionMajor>1</VersionMajor>
@@ -191,6 +219,9 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="BossVideo.mp4">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Damage.MP3">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
