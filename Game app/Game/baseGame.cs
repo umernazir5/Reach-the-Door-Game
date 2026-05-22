@@ -59,8 +59,12 @@ namespace Game_app.Game
             CreateZombies();
             CreateHealthBar();
             audioManager.PlayBackgroundMusic();
+
+            if (gate != null)
+            {
+                gate.Sprite.Visible = false;
+            }
             
-            // Set exact Z-Order by stacking them from back to front
             if (player != null) player.Sprite.SendToBack();
             if (gate != null) gate.Sprite.SendToBack();
             foreach (Zombie zombie in zombies) zombie.Sprite.BringToFront();
@@ -87,16 +91,21 @@ namespace Game_app.Game
             UpdatePlayerFire();
             UpdateZombies();
 
+            if (gate != null && !gate.Sprite.Visible && zombies.Count == 0)
+            {
+                gate.Sprite.Visible = true;
+            }
+
             DetectCollisions();
            
         }
 
-        // 2. These are marked "virtual" so your level scripts can override them!
+        
         protected virtual void CreateGate() { }
         protected virtual void CreatePlatforms() { }
         protected virtual void CreateZombies() { }
 
-        // 3. Core Creation Methods (Shared across all levels)
+       
         protected virtual void CreatePlayer()
         {
             player = new Player(Game_app.Properties.Resources.Character, 380, 380, groundLevel);
@@ -311,7 +320,8 @@ namespace Game_app.Game
         // 5. Responsibility: Check Player vs Gate
         protected void CheckGateCollision()
         {
-            if (gate != null && collisionManager.CheckGateCollision(gate, player))
+            // NEW: Added "gate.Sprite.Visible" to the condition so hidden gates can't be touched
+            if (gate != null && gate.Sprite.Visible && collisionManager.CheckGateCollision(gate, player))
             {
                 OnGameWin?.Invoke();
             }
