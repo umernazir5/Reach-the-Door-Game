@@ -55,5 +55,29 @@ namespace Game_app.GameObjects
             Health--;
             if (Health <= 0) Destroy();
         }
+       
+public ZombieFire Fire(Image fireImg)
+{
+    int fireWidth = 70;
+    int fireHeight = 50;
+    
+    int left = X + (Sprite.Width / 2) - (fireWidth / 2);
+    int top = Y + (Sprite.Height / 2) - 20;
+
+
+            int fireSpeed;
+
+            if (direction == Game_app.Enums.Direction.Left)
+            {
+                fireSpeed = -15; 
+            }
+            else
+            {
+                fireSpeed = 15; 
+            }
+
+            return new ZombieFire(fireImg, left, top, fireSpeed);
+}
+   
     }
 }

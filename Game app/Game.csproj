@@ -59,6 +59,7 @@
     <Compile Include="GameObjects\Platform.cs" />
     <Compile Include="GameObjects\Player.cs" />
     <Compile Include="GameObjects\enemyFire.cs" />
+    <Compile Include="GameObjects\ZombieFire.cs" />
     <Compile Include="Game\Game1.cs" />
     <Compile Include="Game\Game2.cs" />
     <Compile Include="Game\Game3.cs" />

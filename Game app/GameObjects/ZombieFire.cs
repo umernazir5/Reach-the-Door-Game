@@ -3,31 +3,25 @@ using System.Windows.Forms;
 
 namespace Game_app.GameObjects
 {
-    internal class enemyFire : GameObject
+    internal class ZombieFire : GameObject
     {
-        private int speed;
-        
+        private int speedX;
 
-        public enemyFire(Image img, int x, int y, int speed)
+        public ZombieFire(Image img, int x, int y, int speedX)
         {
-            this.speed = speed;
             Sprite = new PictureBox();
             Sprite.Image = img;
             Sprite.SizeMode = PictureBoxSizeMode.AutoSize;
             Sprite.BackColor = Color.Transparent;
-            Sprite.Width = img.Width;
-            Sprite.Height = img.Height;
             X = x;
             Y = y;
+
+            this.speedX = speedX;
         }
 
-        public void ShipMove()
+        public void Move()
         {
-            Y += speed;
+            X += speedX; 
         }
-    
-
     }
 }
-    
-

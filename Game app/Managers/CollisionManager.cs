@@ -86,5 +86,23 @@ namespace Game_app.Managers
 
             return playerHitbox.IntersectsWith(zombieHitbox);
         }
+        public bool CheckZombieFireHitsPlayer(ZombieFire proj, Player player)
+        {
+            Rectangle fireHitbox = new Rectangle(
+                proj.X + 30,
+                proj.Y + 20,
+                proj.Sprite.Width - 50,
+                proj.Sprite.Height - 15
+            );
+
+            Rectangle playerHitbox = new Rectangle(
+                player.X + 30,
+                player.Y + 15,
+                player.Sprite.Width - 50,
+                player.Sprite.Height - 20
+            );
+
+            return playerHitbox.IntersectsWith(fireHitbox);
+        }
     }
 }
