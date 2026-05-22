@@ -26,10 +26,10 @@ namespace Game_app.Managers
 
         public bool CheckGateCollision(Gate gate, Player player)
         {
-            int marginLeft = 60;
-            int marginTop = 15;
-            int marginRight = 10;
-            int marginBottom = 15;
+            int marginLeft = 65;
+            int marginTop = 20;
+            int marginRight = 15;
+            int marginBottom = 20;
 
             Rectangle gateHitbox = new Rectangle(
                 gate.X + marginLeft,
@@ -59,10 +59,10 @@ namespace Game_app.Managers
                 proj.Sprite.Height - 15
             );
             Rectangle enemyHitbox = new Rectangle(
-                zombie.X + 30,
-                zombie.Y + 15,
-                zombie.Sprite.Width - 50,
-                zombie.Sprite.Height - 20
+                zombie.X + 5,
+                zombie.Y + 5,
+                zombie.Sprite.Width - 10,
+                zombie.Sprite.Height - 7
             );
             return enemyHitbox.IntersectsWith(fireHitbox);
         }

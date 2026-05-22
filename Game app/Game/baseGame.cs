@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using Game_app.Managers;
 
 namespace Game_app.Game
 {
@@ -322,7 +323,9 @@ namespace Game_app.Game
             bool damageTaken = player.TakeDamage(); // Safely triggers invincibility frames
             if (damageTaken)
             {
+                audioManager.PlayDamageMusic();
                 healthBar.UpdateDisplay(player.playerHealth);
+                
 
                 if (player.playerHealth <= 0)
                 {

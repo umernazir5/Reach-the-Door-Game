@@ -32,9 +32,9 @@ namespace Game_app.Game
         protected override void CreateZombies()
         {
             
-            AddZombies(150, 225, 150, 270);
-            AddZombies(320, 145, 320, 440);
-            AddZombies(550, 195, 550, 670);
+            AddZombies(150, 250, 150, 270);
+            AddZombies(320, 170, 320, 440);
+            AddZombies(550, 220, 550, 670);
         }
     }
 }

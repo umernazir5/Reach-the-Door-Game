@@ -19,8 +19,8 @@ namespace Game_app.GameObjects
             Sprite.Image = img;
             Sprite.SizeMode = PictureBoxSizeMode.StretchImage;
             Sprite.BackColor = Color.Transparent;
-            Sprite.Width = 110;
-            Sprite.Height = 100;
+            Sprite.Width = 55;
+            Sprite.Height = 60;
             X = x;
             Y = y;
             leftBoundary = leftBound;

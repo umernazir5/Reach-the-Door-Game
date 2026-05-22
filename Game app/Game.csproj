@@ -145,6 +145,9 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Damage.MP3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Fahh.MP3">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
