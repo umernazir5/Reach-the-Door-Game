@@ -16,7 +16,7 @@ namespace Game_app
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Level2());
+            Application.Run(new Level3());
         }
     }
 }

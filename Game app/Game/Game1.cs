@@ -191,7 +191,7 @@ namespace Game_app.Game
                     RemoveEnemyFire(proj, i);
                     continue;
                 }
-                proj.Move();
+                proj.ShipMove();
                 if (proj.Y > form.ClientSize.Height) RemoveEnemyFire(proj, i);
             }
         }

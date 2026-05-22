@@ -4,21 +4,25 @@ using System.Windows.Forms;
 
 namespace Game_app
 {
-    public partial class Level2 : Form
+    public partial class Level3 : Form
     {
-        Game.Game2 game;
+        Game.Game3 game;
 
-        public Level2()
+        public Level3()
         {
             InitializeComponent();
 
+            
             this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer, true);
             this.UpdateStyles();
 
-            game = new Game.Game2(this);
+          
+            game = new Game.Game3(this);
             game.OnGameOver += HandleGameOver;
             game.OnGameWin += HandleGameWin;
             game.Start();
+
+           
             this.gameLoop.Tick += new System.EventHandler(this.gameLoop_Tick);
             this.gameLoop.Enabled = true;
         }
@@ -32,19 +36,20 @@ namespace Game_app
         {
             gameLoop.Stop();
             MessageBox.Show("Game Over!");
+
+            // Optional: You can choose to restart the level or close the app here
+            // Application.Exit(); 
         }
 
         private void HandleGameWin()
         {
             gameLoop.Stop();
-            MessageBox.Show("Congratulations! You've reached the gate!");
 
-            Level2 level2 = new Level2();
+            // Since this is Level 3, we show a final victory message instead of loading Level 2!
+            MessageBox.Show("Congratulations! You've survived the zombie fire and beaten the game!");
 
-            level2.FormClosed += (s, args) => this.Close();
-
-            level2.Show();
-            this.Hide();
+            // Closes the entire game safely and frees up memory
+            Application.Exit();
         }
 
         protected override void OnPaint(PaintEventArgs e)

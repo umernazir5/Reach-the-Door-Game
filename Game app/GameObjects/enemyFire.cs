@@ -21,11 +21,15 @@ namespace Game_app.GameObjects
             Y = y;
         }
 
-        public void Move()
+        public void ShipMove()
         {
             Y += speed;
         }
-    
+        public void ZombieMove()
+        {
+            X += speed;
+        }
+
     }
 }
     

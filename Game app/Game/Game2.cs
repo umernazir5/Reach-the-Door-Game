@@ -1,5 +1,7 @@
 ﻿using Game_app.GameObjects;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Security.Policy;
 using System.Windows.Forms;
 
 namespace Game_app.Game
@@ -26,19 +28,18 @@ namespace Game_app.Game
 
         public override void Update()
         {
-            // Runs Level 1 logic (Movement, gravity, enemy fire)
+         
             base.Update();
 
             if (player == null || player.playerHealth <= 0) return;
 
-            // Adds Level 2 logic
             UpdateZombies();
         }
 
         protected override void CreateGate()
         {
             gate = new Gate(Game_app.Properties.Resources.Gate, 545, 30);
-            gate.Sprite.Visible = false; // Hidden in Level 2!
+            gate.Sprite.Visible = false; 
             form.Controls.Add(gate.Sprite);
         }
 
@@ -67,6 +68,14 @@ namespace Game_app.Game
             Zombie zombie = new Zombie(Game_app.Properties.Resources.zombie, x, y, leftBound, rightBound);
             form.Controls.Add(zombie.Sprite);
             zombies.Add(zombie);
+        }
+        protected void AddZombiesFlip(int x, int y, int leftBound, int rightBound)
+        {
+            Zombie zombie = new Zombie(Game_app.Properties.Resources.zombie, x, y, leftBound, rightBound);
+            zombie.Sprite.Image.RotateFlip(RotateFlipType.RotateNoneFlipX);
+            form.Controls.Add(zombie.Sprite);
+            zombies.Add(zombie);
+            
         }
 
         protected virtual void UpdateZombies()
