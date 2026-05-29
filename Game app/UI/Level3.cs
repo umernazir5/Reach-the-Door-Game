@@ -13,17 +13,17 @@ namespace Game_app
         {
             InitializeComponent();
 
-            
             this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer, true);
             this.UpdateStyles();
+            this.Shown += Level3_Shown;
+        }
 
-          
+        private void Level3_Shown(object sender, EventArgs e)
+        {
             game = new Game.Game3(this);
             game.OnGameOver += HandleGameOver;
             game.OnGameWin += HandleGameWin;
             game.Start();
-
-           
             this.gameLoop.Tick += new System.EventHandler(this.gameLoop_Tick);
             this.gameLoop.Enabled = true;
         }
@@ -35,6 +35,7 @@ namespace Game_app
 
         private void HandleGameOver()
         {
+            gameLoop.Stop();
             GameOver gameover = new GameOver();
             gameover.FormClosed += (s, args) => Application.Exit();
             gameover.Show();
@@ -44,9 +45,7 @@ namespace Game_app
         private void HandleGameWin()
         {
             gameLoop.Stop();
-
-            BossVideo bossvideo = new BossVideo();
-            NextLevel transition = new NextLevel(bossvideo);
+            NextLevel transition = new NextLevel(() => new BossVideo());
             transition.FormClosed += (s, args) => Application.Exit();
             transition.Show();
             this.Hide();

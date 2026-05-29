@@ -19,6 +19,8 @@ namespace Game_app
             game.OnGameOver += HandleGameOver;
             game.OnGameWin += HandleGameWin;
             game.Start();
+            // Level1's gameLoop is started by the designer (Enabled=true in InitializeComponent),
+            // so no manual start is needed here.
         }
 
         private void gameLoop_Tick(object sender, EventArgs e)
@@ -28,6 +30,7 @@ namespace Game_app
 
         private void HandleGameOver()
         {
+            gameLoop.Stop();
             GameOver gameover = new GameOver();
             gameover.FormClosed += (s, args) => Application.Exit();
             gameover.Show();
@@ -37,8 +40,9 @@ namespace Game_app
         private void HandleGameWin()
         {
             gameLoop.Stop();
-            Level2 level2 = new Level2();
-            NextLevel transition = new NextLevel(level2);
+            // Pass a factory lambda — Level2 is NOT constructed here.
+            // It will only be created when the user clicks "Continue" in NextLevel.
+            NextLevel transition = new NextLevel(() => new Level2());
             transition.FormClosed += (s, args) => Application.Exit();
             transition.Show();
             this.Hide();

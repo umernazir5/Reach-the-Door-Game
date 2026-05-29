@@ -14,7 +14,11 @@ namespace Game_app
 
             this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer, true);
             this.UpdateStyles();
+            this.Shown += Level2_Shown;
+        }
 
+        private void Level2_Shown(object sender, EventArgs e)
+        {
             game = new Game.Game2(this);
             game.OnGameOver += HandleGameOver;
             game.OnGameWin += HandleGameWin;
@@ -30,6 +34,7 @@ namespace Game_app
 
         private void HandleGameOver()
         {
+            gameLoop.Stop();
             GameOver gameover = new GameOver();
             gameover.FormClosed += (s, args) => Application.Exit();
             gameover.Show();
@@ -39,9 +44,7 @@ namespace Game_app
         private void HandleGameWin()
         {
             gameLoop.Stop();
-
-            Level3 level3 = new Level3();
-            NextLevel transition = new NextLevel(level3);
+            NextLevel transition = new NextLevel(() => new Level3());
             transition.FormClosed += (s, args) => Application.Exit();
             transition.Show();
             this.Hide();
